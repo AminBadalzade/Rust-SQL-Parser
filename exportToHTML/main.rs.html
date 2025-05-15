@@ -1,0 +1,244 @@
+<html>
+<head>
+<title>main.rs</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cf8e6d;}
+.s1 { color: #bcbec4;}
+.s2 { color: #bcbec4;}
+.s3 { color: #6aab73;}
+.s4 { color: #2aacb8;}
+.s5 { color: #7a7e85;}
+.s6 { color: #20999d; font-style: italic;}
+</style>
+</head>
+<body bgcolor="#1e1f22">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+main.rs</font>
+</center></td></tr></table>
+<pre><span class="s0">use </span><span class="s1">std</span><span class="s2">::</span><span class="s1">io</span><span class="s2">;</span>
+<span class="s0">use </span><span class="s1">std</span><span class="s2">::</span><span class="s1">fmt</span><span class="s2">;</span>
+
+<span class="s0">fn </span><span class="s1">main</span><span class="s2">() {</span>
+    <span class="s1">println</span><span class="s2">!(</span><span class="s3">&quot;The sum of two numbers is: {}&quot;</span><span class="s2">, </span><span class="s1">sum_two_numbers</span><span class="s2">(</span><span class="s4">12</span><span class="s2">,</span><span class="s4">13</span><span class="s2">)); </span><span class="s5">// first task</span>
+    <span class="s1">input</span><span class="s2">(); </span><span class="s5">// second task</span>
+    <span class="s0">let mut </span><span class="s1">user </span><span class="s2">= </span><span class="s1">User</span><span class="s2">::</span><span class="s1">new</span><span class="s2">(</span><span class="s3">&quot;Amin&quot;</span><span class="s2">, </span><span class="s3">&quot;Badalzade&quot;</span><span class="s2">); </span><span class="s5">// third task</span>
+
+    <span class="s5">// Display user information before adding a dot</span>
+    <span class="s1">println</span><span class="s2">!(</span><span class="s3">&quot;Before modification:&quot;</span><span class="s2">);</span>
+    <span class="s1">user</span><span class="s2">.</span><span class="s1">output</span><span class="s2">();</span>
+
+    <span class="s5">// Modify the user's name by adding a dot</span>
+    <span class="s1">user</span><span class="s2">.</span><span class="s1">add_dot_to_name</span><span class="s2">(); </span><span class="s5">// fourth task</span>
+
+    <span class="s5">// Display user information after modification</span>
+    <span class="s1">println</span><span class="s2">!(</span><span class="s3">&quot;</span><span class="s0">\n</span><span class="s3">After modification:&quot;</span><span class="s2">);</span>
+    <span class="s1">user</span><span class="s2">.</span><span class="s1">output</span><span class="s2">();</span>
+
+    <span class="s1">array</span><span class="s2">(); </span><span class="s5">// Call the array function // fifth task</span>
+    <span class="s5">// sixth task:</span>
+    <span class="s0">let mut </span><span class="s1">container </span><span class="s2">= </span><span class="s1">Container</span><span class="s2">::</span><span class="s1">None</span><span class="s2">;</span>
+    <span class="s0">for </span><span class="s1">_ </span><span class="s0">in </span><span class="s4">0</span><span class="s2">..</span><span class="s4">5 </span><span class="s2">{</span>
+        <span class="s1">container </span><span class="s2">= </span><span class="s1">Container</span><span class="s2">::</span><span class="s1">Contained</span><span class="s2">(</span><span class="s1">Box</span><span class="s2">::</span><span class="s1">new</span><span class="s2">(</span><span class="s1">container</span><span class="s2">));</span>
+    <span class="s2">}</span>
+
+    <span class="s5">// Print the depth of containment.</span>
+    <span class="s1">println</span><span class="s2">!(</span><span class="s3">&quot;Depth of containment: {}&quot;</span><span class="s2">, </span><span class="s1">container</span><span class="s2">.</span><span class="s1">depth</span><span class="s2">());</span>
+
+    <span class="s1">slices</span><span class="s2">(</span><span class="s3">&quot;Harry Potter is a good adventure book&quot;</span><span class="s2">); </span><span class="s5">// seventh task</span>
+    <span class="s5">// eighth task is below</span>
+    <span class="s5">// Call the function to handle number input and matching</span>
+    <span class="s1">handle_number_input</span><span class="s2">(); </span><span class="s5">// ninth task</span>
+
+    <span class="s5">// Parse and handle token input examples</span>
+    <span class="s0">let </span><span class="s1">correct_input </span><span class="s2">= </span><span class="s3">&quot;+--+*//*-+&quot;</span><span class="s2">; </span><span class="s5">// tenth task</span>
+    <span class="s1">parse_and_handle_input</span><span class="s2">(</span><span class="s1">correct_input</span><span class="s2">); </span><span class="s5">// Correct input</span>
+
+    <span class="s0">let </span><span class="s1">incorrect_input </span><span class="s2">= </span><span class="s3">&quot;+--+*//*-+a&quot;</span><span class="s2">;</span>
+    <span class="s1">parse_and_handle_input</span><span class="s2">(</span><span class="s1">incorrect_input</span><span class="s2">); </span><span class="s5">// Incorrect input</span>
+<span class="s2">}</span>
+
+<span class="s0">fn </span><span class="s1">sum_two_numbers</span><span class="s2">(</span><span class="s1">a</span><span class="s2">:</span><span class="s1">i32</span><span class="s2">, </span><span class="s1">b</span><span class="s2">:</span><span class="s1">i32</span><span class="s2">) -&gt; </span><span class="s1">i32 </span><span class="s2">{</span>
+    <span class="s1">a</span><span class="s2">+</span><span class="s1">b</span>
+<span class="s2">}</span>
+
+<span class="s2">#[</span><span class="s1">derive</span><span class="s2">(</span><span class="s1">Debug</span><span class="s2">)]</span>
+<span class="s0">struct </span><span class="s1">User </span><span class="s2">{</span>
+    <span class="s1">name</span><span class="s2">: </span><span class="s1">String</span><span class="s2">,</span>
+    <span class="s1">surname</span><span class="s2">: </span><span class="s1">String</span><span class="s2">,</span>
+<span class="s2">}</span>
+
+<span class="s0">impl </span><span class="s1">User </span><span class="s2">{</span>
+    <span class="s0">fn </span><span class="s1">new</span><span class="s2">(</span><span class="s1">name</span><span class="s2">: &amp;</span><span class="s1">str</span><span class="s2">, </span><span class="s1">surname</span><span class="s2">: &amp;</span><span class="s1">str</span><span class="s2">) -&gt; </span><span class="s0">Self </span><span class="s2">{</span>
+        <span class="s0">Self </span><span class="s2">{</span>
+            <span class="s1">name</span><span class="s2">: </span><span class="s1">name</span><span class="s2">.</span><span class="s1">to_string</span><span class="s2">(),</span>
+            <span class="s1">surname</span><span class="s2">: </span><span class="s1">surname</span><span class="s2">.</span><span class="s1">to_string</span><span class="s2">(),</span>
+        <span class="s2">}</span>
+    <span class="s2">}</span>
+
+    <span class="s0">fn </span><span class="s1">add_dot_to_name</span><span class="s2">(&amp;</span><span class="s0">mut self</span><span class="s2">) {</span>
+        <span class="s0">self</span><span class="s2">.</span><span class="s1">name</span><span class="s2">.</span><span class="s1">push</span><span class="s2">(</span><span class="s3">'.'</span><span class="s2">); </span><span class="s5">// Adds a dot to the name</span>
+    <span class="s2">}</span>
+
+    <span class="s0">fn </span><span class="s1">output</span><span class="s2">(&amp;</span><span class="s0">self</span><span class="s2">) {</span>
+        <span class="s5">// Print using the Display trait</span>
+        <span class="s1">println</span><span class="s2">!(</span><span class="s3">&quot;{}&quot;</span><span class="s2">, </span><span class="s0">self</span><span class="s2">);</span>
+    <span class="s2">}</span>
+<span class="s2">}</span>
+
+<span class="s0">impl </span><span class="s1">fmt</span><span class="s2">::</span><span class="s1">Display </span><span class="s0">for </span><span class="s1">User </span><span class="s2">{ </span><span class="s5">//eighth task</span>
+    <span class="s0">fn </span><span class="s1">fmt</span><span class="s2">(&amp;</span><span class="s0">self</span><span class="s2">, </span><span class="s1">f</span><span class="s2">: &amp;</span><span class="s0">mut </span><span class="s1">fmt</span><span class="s2">::</span><span class="s1">Formatter</span><span class="s2">) -&gt; </span><span class="s1">fmt</span><span class="s2">::</span><span class="s1">Result </span><span class="s2">{</span>
+        <span class="s1">write</span><span class="s2">!(</span><span class="s1">f</span><span class="s2">, </span><span class="s3">&quot;Your full name is: {} {}&quot;</span><span class="s2">, </span><span class="s0">self</span><span class="s2">.</span><span class="s1">name</span><span class="s2">, </span><span class="s0">self</span><span class="s2">.</span><span class="s1">surname</span><span class="s2">)</span>
+    <span class="s2">}</span>
+<span class="s2">}</span>
+<span class="s0">enum </span><span class="s1">Container </span><span class="s2">{</span>
+    <span class="s1">None</span><span class="s2">,</span>
+    <span class="s1">Contained</span><span class="s2">(</span><span class="s1">Box</span><span class="s2">&lt;</span><span class="s1">Container</span><span class="s2">&gt;),</span>
+<span class="s2">}</span>
+
+<span class="s0">impl </span><span class="s1">Container </span><span class="s2">{</span>
+    <span class="s5">// Function to compute the depth of containment.</span>
+    <span class="s0">fn </span><span class="s1">depth</span><span class="s2">(&amp;</span><span class="s0">self</span><span class="s2">) -&gt; </span><span class="s1">u32 </span><span class="s2">{</span>
+        <span class="s0">match self </span><span class="s2">{</span>
+            <span class="s1">Container</span><span class="s2">::</span><span class="s1">None </span><span class="s2">=&gt; </span><span class="s4">1</span><span class="s2">,  </span><span class="s5">// Base case: depth of `None` is 1.</span>
+            <span class="s1">Container</span><span class="s2">::</span><span class="s1">Contained</span><span class="s2">(</span><span class="s1">inner</span><span class="s2">) =&gt; </span><span class="s4">1 </span><span class="s2">+ </span><span class="s1">inner</span><span class="s2">.</span><span class="s1">depth</span><span class="s2">(),  </span><span class="s5">// Recursively calculate the depth.</span>
+        <span class="s2">}</span>
+    <span class="s2">}</span>
+<span class="s2">}</span>
+
+<span class="s0">fn </span><span class="s1">input</span><span class="s2">() {</span>
+    <span class="s1">println</span><span class="s2">!(</span><span class="s3">&quot;What is your name?&quot;</span><span class="s2">);</span>
+    <span class="s0">let </span><span class="s1">name </span><span class="s2">= </span><span class="s1">input_name</span><span class="s2">(); </span><span class="s5">// Read the name from input</span>
+    <span class="s1">print_name</span><span class="s2">(&amp;</span><span class="s1">name</span><span class="s2">); </span><span class="s5">// Print the greeting</span>
+<span class="s2">}</span>
+
+<span class="s0">fn </span><span class="s1">input_name</span><span class="s2">() -&gt; </span><span class="s1">String </span><span class="s2">{</span>
+    <span class="s0">let mut </span><span class="s1">input </span><span class="s2">= </span><span class="s1">String</span><span class="s2">::</span><span class="s1">new</span><span class="s2">();</span>
+    <span class="s1">io</span><span class="s2">::</span><span class="s1">stdin</span><span class="s2">()</span>
+        <span class="s2">.</span><span class="s1">read_line</span><span class="s2">(&amp;</span><span class="s0">mut </span><span class="s1">input</span><span class="s2">)</span>
+        <span class="s2">.</span><span class="s1">expect</span><span class="s2">(</span><span class="s3">&quot;Failed to read line&quot;</span><span class="s2">);</span>
+    <span class="s1">input</span><span class="s2">.</span><span class="s1">trim</span><span class="s2">().</span><span class="s1">to_string</span><span class="s2">() </span><span class="s5">// Trim and return the name</span>
+<span class="s2">}</span>
+
+<span class="s0">fn </span><span class="s1">print_name</span><span class="s2">(</span><span class="s1">name</span><span class="s2">: &amp;</span><span class="s1">str</span><span class="s2">) {</span>
+    <span class="s1">println</span><span class="s2">!(</span><span class="s3">&quot;Hello, {}&quot;</span><span class="s2">, </span><span class="s1">name</span><span class="s2">);</span>
+    <span class="s1">println</span><span class="s2">!();</span>
+<span class="s2">}</span>
+
+<span class="s0">fn </span><span class="s1">array</span><span class="s2">() {</span>
+    <span class="s0">let mut </span><span class="s1">fruits</span><span class="s2">: [</span><span class="s1">String</span><span class="s2">; </span><span class="s4">5</span><span class="s2">] = [</span>
+        <span class="s3">&quot;apple&quot;</span><span class="s2">.</span><span class="s1">to_string</span><span class="s2">(),</span>
+        <span class="s3">&quot;orange&quot;</span><span class="s2">.</span><span class="s1">to_string</span><span class="s2">(),</span>
+        <span class="s3">&quot;banana&quot;</span><span class="s2">.</span><span class="s1">to_string</span><span class="s2">(),</span>
+        <span class="s3">&quot;watermelon&quot;</span><span class="s2">.</span><span class="s1">to_string</span><span class="s2">(),</span>
+        <span class="s3">&quot;melon&quot;</span><span class="s2">.</span><span class="s1">to_string</span><span class="s2">(),</span>
+    <span class="s2">];</span>
+
+    <span class="s5">// Reverse each string in place</span>
+    <span class="s0">for </span><span class="s1">fruit </span><span class="s0">in </span><span class="s2">&amp;</span><span class="s0">mut </span><span class="s1">fruits </span><span class="s2">{</span>
+        <span class="s2">*</span><span class="s1">fruit </span><span class="s2">= </span><span class="s1">fruit</span><span class="s2">.</span><span class="s1">chars</span><span class="s2">().</span><span class="s1">rev</span><span class="s2">().</span><span class="s1">collect</span><span class="s2">();</span>
+    <span class="s2">}</span>
+
+    <span class="s5">// Print all reversed strings with a newline at the end</span>
+    <span class="s0">for </span><span class="s1">fruit </span><span class="s0">in </span><span class="s2">&amp;</span><span class="s1">fruits </span><span class="s2">{</span>
+        <span class="s1">print</span><span class="s2">!(</span><span class="s3">&quot;{} &quot;</span><span class="s2">, </span><span class="s1">fruit</span><span class="s2">);</span>
+    <span class="s2">}</span>
+    <span class="s1">println</span><span class="s2">!(); </span><span class="s5">// Newline for better formatting</span>
+<span class="s2">}</span>
+
+<span class="s0">fn </span><span class="s1">slices</span><span class="s2">(</span><span class="s1">s</span><span class="s2">: &amp;</span><span class="s1">str</span><span class="s2">) -&gt; </span><span class="s1">Vec</span><span class="s2">&lt;&amp;</span><span class="s1">str</span><span class="s2">&gt; {</span>
+    <span class="s5">// Split the string into words using whitespace and newline characters as delimiters</span>
+    <span class="s0">let </span><span class="s1">words</span><span class="s2">: </span><span class="s1">Vec</span><span class="s2">&lt;&amp;</span><span class="s1">str</span><span class="s2">&gt; = </span><span class="s1">s</span><span class="s2">.</span><span class="s1">split_whitespace</span><span class="s2">()</span>
+        <span class="s2">.</span><span class="s1">filter</span><span class="s2">(|</span><span class="s1">word</span><span class="s2">| !</span><span class="s1">word</span><span class="s2">.</span><span class="s1">is_empty</span><span class="s2">()) </span><span class="s5">// Ensure no empty words are included</span>
+        <span class="s2">.</span><span class="s1">collect</span><span class="s2">(); </span><span class="s5">// Collect the result into a vector</span>
+
+    <span class="s5">// Print each word from the vector</span>
+    <span class="s0">for </span><span class="s1">word </span><span class="s0">in </span><span class="s2">&amp;</span><span class="s1">words </span><span class="s2">{</span>
+        <span class="s1">println</span><span class="s2">!(</span><span class="s3">&quot;{} &quot;</span><span class="s2">, </span><span class="s1">word</span><span class="s2">);</span>
+    <span class="s2">}</span>
+
+    <span class="s1">words  </span><span class="s5">// Return the vector of words</span>
+<span class="s2">}</span>
+
+<span class="s0">fn </span><span class="s1">input_number</span><span class="s2">() -&gt; </span><span class="s1">Result</span><span class="s2">&lt;</span><span class="s1">i32</span><span class="s2">, </span><span class="s1">std</span><span class="s2">::</span><span class="s1">num</span><span class="s2">::</span><span class="s1">ParseIntError</span><span class="s2">&gt; {</span>
+    <span class="s0">let mut </span><span class="s1">input </span><span class="s2">= </span><span class="s1">String</span><span class="s2">::</span><span class="s1">new</span><span class="s2">();</span>
+    <span class="s1">io</span><span class="s2">::</span><span class="s1">stdin</span><span class="s2">().</span><span class="s1">read_line</span><span class="s2">(&amp;</span><span class="s0">mut </span><span class="s1">input</span><span class="s2">).</span><span class="s1">expect</span><span class="s2">(</span><span class="s3">&quot;Failed to read line&quot;</span><span class="s2">);</span>
+    <span class="s1">input</span><span class="s2">.</span><span class="s1">trim</span><span class="s2">().</span><span class="s1">parse</span><span class="s2">::&lt;</span><span class="s1">i32</span><span class="s2">&gt;() </span><span class="s5">// Try parsing the string as an integer</span>
+<span class="s2">}</span>
+
+<span class="s0">fn </span><span class="s1">handle_number_input</span><span class="s2">() {</span>
+    <span class="s1">println</span><span class="s2">!(</span><span class="s3">&quot;Please enter the first number:&quot;</span><span class="s2">);</span>
+    <span class="s0">let </span><span class="s1">first_input </span><span class="s2">= </span><span class="s1">input_number</span><span class="s2">();</span>
+
+    <span class="s1">println</span><span class="s2">!(</span><span class="s3">&quot;Please enter the second number:&quot;</span><span class="s2">);</span>
+    <span class="s0">let </span><span class="s1">second_input </span><span class="s2">= </span><span class="s1">input_number</span><span class="s2">();</span>
+
+    <span class="s5">// Match the parsed numbers and print based on conditions</span>
+    <span class="s0">match </span><span class="s2">(</span><span class="s1">first_input</span><span class="s2">, </span><span class="s1">second_input</span><span class="s2">) {</span>
+        <span class="s2">(</span><span class="s1">Ok</span><span class="s2">(</span><span class="s1">first</span><span class="s2">), </span><span class="s1">Ok</span><span class="s2">(</span><span class="s1">second</span><span class="s2">)) =&gt; {</span>
+            <span class="s0">if </span><span class="s1">first </span><span class="s2">&lt; </span><span class="s4">10 </span><span class="s2">&amp;&amp; </span><span class="s1">second </span><span class="s2">&lt; </span><span class="s4">10 </span><span class="s2">{</span>
+                <span class="s1">println</span><span class="s2">!(</span><span class="s3">&quot;MAYBE&quot;</span><span class="s2">);</span>
+            <span class="s2">} </span><span class="s0">else if </span><span class="s1">first </span><span class="s2">&lt; </span><span class="s4">100 </span><span class="s2">&amp;&amp; </span><span class="s1">second </span><span class="s2">&lt; </span><span class="s4">100 </span><span class="s2">{</span>
+                <span class="s1">println</span><span class="s2">!(</span><span class="s3">&quot;OKAY&quot;</span><span class="s2">);</span>
+            <span class="s2">} </span><span class="s0">else </span><span class="s2">{</span>
+                <span class="s1">println</span><span class="s2">!(</span><span class="s3">&quot;{} {}&quot;</span><span class="s2">, </span><span class="s1">first</span><span class="s2">, </span><span class="s1">second</span><span class="s2">);</span>
+            <span class="s2">}</span>
+        <span class="s2">}</span>
+        <span class="s1">_ </span><span class="s2">=&gt; {</span>
+            <span class="s1">println</span><span class="s2">!(</span><span class="s3">&quot;Error: Invalid input. Please enter valid numbers.&quot;</span><span class="s2">);</span>
+        <span class="s2">}</span>
+    <span class="s2">}</span>
+<span class="s2">}</span>
+
+<span class="s2">#[</span><span class="s1">derive</span><span class="s2">(</span><span class="s1">Debug</span><span class="s2">)]</span>
+<span class="s0">enum </span><span class="s1">Token </span><span class="s2">{</span>
+    <span class="s1">Plus</span><span class="s2">,</span>
+    <span class="s1">Minus</span><span class="s2">,</span>
+    <span class="s1">Multiply</span><span class="s2">,</span>
+    <span class="s1">Divide</span><span class="s2">,</span>
+<span class="s2">}</span>
+
+<span class="s0">impl </span><span class="s1">fmt</span><span class="s2">::</span><span class="s1">Display </span><span class="s0">for </span><span class="s1">Token </span><span class="s2">{</span>
+    <span class="s0">fn </span><span class="s1">fmt</span><span class="s2">(&amp;</span><span class="s0">self</span><span class="s2">, </span><span class="s1">f</span><span class="s2">: &amp;</span><span class="s0">mut </span><span class="s1">fmt</span><span class="s2">::</span><span class="s1">Formatter</span><span class="s2">&lt;</span><span class="s6">'_</span><span class="s2">&gt;) -&gt; </span><span class="s1">fmt</span><span class="s2">::</span><span class="s1">Result </span><span class="s2">{</span>
+        <span class="s0">match self </span><span class="s2">{</span>
+            <span class="s1">Token</span><span class="s2">::</span><span class="s1">Plus </span><span class="s2">=&gt; </span><span class="s1">write</span><span class="s2">!(</span><span class="s1">f</span><span class="s2">, </span><span class="s3">&quot;+&quot;</span><span class="s2">),</span>
+            <span class="s1">Token</span><span class="s2">::</span><span class="s1">Minus </span><span class="s2">=&gt; </span><span class="s1">write</span><span class="s2">!(</span><span class="s1">f</span><span class="s2">, </span><span class="s3">&quot;-&quot;</span><span class="s2">),</span>
+            <span class="s1">Token</span><span class="s2">::</span><span class="s1">Multiply </span><span class="s2">=&gt; </span><span class="s1">write</span><span class="s2">!(</span><span class="s1">f</span><span class="s2">, </span><span class="s3">&quot;*&quot;</span><span class="s2">),</span>
+            <span class="s1">Token</span><span class="s2">::</span><span class="s1">Divide </span><span class="s2">=&gt; </span><span class="s1">write</span><span class="s2">!(</span><span class="s1">f</span><span class="s2">, </span><span class="s3">&quot;/&quot;</span><span class="s2">),</span>
+        <span class="s2">}</span>
+    <span class="s2">}</span>
+<span class="s2">}</span>
+
+<span class="s0">fn </span><span class="s1">parse_and_handle_input</span><span class="s2">(</span><span class="s1">input</span><span class="s2">: &amp;</span><span class="s1">str</span><span class="s2">) {</span>
+    <span class="s0">match </span><span class="s1">parse_tokens</span><span class="s2">(</span><span class="s1">input</span><span class="s2">) {</span>
+        <span class="s1">Ok</span><span class="s2">(</span><span class="s1">tokens</span><span class="s2">) =&gt; {</span>
+            <span class="s1">println</span><span class="s2">!(</span><span class="s3">&quot;Parsed tokens from input:&quot;</span><span class="s2">);</span>
+            <span class="s0">for </span><span class="s1">token </span><span class="s0">in </span><span class="s1">tokens </span><span class="s2">{</span>
+                <span class="s1">println</span><span class="s2">!(</span><span class="s3">&quot;{}&quot;</span><span class="s2">, </span><span class="s1">token</span><span class="s2">); </span><span class="s5">// Print the token using Display trait</span>
+            <span class="s2">}</span>
+        <span class="s2">}</span>
+        <span class="s1">Err</span><span class="s2">(</span><span class="s1">e</span><span class="s2">) =&gt; </span><span class="s1">println</span><span class="s2">!(</span><span class="s3">&quot;Error: {}&quot;</span><span class="s2">, </span><span class="s1">e</span><span class="s2">),</span>
+    <span class="s2">}</span>
+<span class="s2">}</span>
+
+<span class="s0">fn </span><span class="s1">parse_tokens</span><span class="s2">(</span><span class="s1">input</span><span class="s2">: &amp;</span><span class="s1">str</span><span class="s2">) -&gt; </span><span class="s1">Result</span><span class="s2">&lt;</span><span class="s1">Vec</span><span class="s2">&lt;</span><span class="s1">Token</span><span class="s2">&gt;, </span><span class="s1">String</span><span class="s2">&gt; {</span>
+    <span class="s0">let mut </span><span class="s1">tokens </span><span class="s2">= </span><span class="s1">Vec</span><span class="s2">::</span><span class="s1">new</span><span class="s2">();</span>
+
+    <span class="s0">for </span><span class="s1">ch </span><span class="s0">in </span><span class="s1">input</span><span class="s2">.</span><span class="s1">chars</span><span class="s2">() {</span>
+        <span class="s0">let </span><span class="s1">token </span><span class="s2">= </span><span class="s0">match </span><span class="s1">ch </span><span class="s2">{</span>
+            <span class="s3">'+' </span><span class="s2">=&gt; </span><span class="s1">Token</span><span class="s2">::</span><span class="s1">Plus</span><span class="s2">,</span>
+            <span class="s3">'-' </span><span class="s2">=&gt; </span><span class="s1">Token</span><span class="s2">::</span><span class="s1">Minus</span><span class="s2">,</span>
+            <span class="s3">'*' </span><span class="s2">=&gt; </span><span class="s1">Token</span><span class="s2">::</span><span class="s1">Multiply</span><span class="s2">,</span>
+            <span class="s3">'/' </span><span class="s2">=&gt; </span><span class="s1">Token</span><span class="s2">::</span><span class="s1">Divide</span><span class="s2">,</span>
+            <span class="s1">_ </span><span class="s2">=&gt; </span><span class="s0">return </span><span class="s1">Err</span><span class="s2">(</span><span class="s1">format</span><span class="s2">!(</span><span class="s3">&quot;Invalid character found: {}&quot;</span><span class="s2">, </span><span class="s1">ch</span><span class="s2">)), </span><span class="s5">// Return an error for unknown characters</span>
+        <span class="s2">};</span>
+        <span class="s1">tokens</span><span class="s2">.</span><span class="s1">push</span><span class="s2">(</span><span class="s1">token</span><span class="s2">);</span>
+    <span class="s2">}</span>
+
+    <span class="s1">Ok</span><span class="s2">(</span><span class="s1">tokens</span><span class="s2">)</span>
+<span class="s2">}</span>
+</pre>
+</body>
+</html>
